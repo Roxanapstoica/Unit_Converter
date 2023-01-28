@@ -1,34 +1,48 @@
-import tkinter
-
-window = tkinter.Tk()
-window.title("Unit converter")
-window.minsize(width=500, height=300)
-
-####LABEL
-my_label = tkinter.Label(text="Convertor", font=("Arial", 24, "bold"))
-my_label.pack(side="top")
-
-# import turtle
-# tim = turtle.Turtle()
-# tim.write("Some text")
-
-# my_label["text"] = "New text"
-# my_label.config(text="New text 2")
+from tkinter import *
 
 
-###BUTTON
+def convert():
+    input_val = float(miles_input.get())
+    if checked_state.get() == 0:
+        val = input_val * 1.609344
+    else:
+        val = round(input_val * 1.609344)
+    label11.config(text=val)
 
-def button_clicked():
-    # my_label.config(text="Button got clicked")
-    my_label.config(text=input.get())
+window = Tk()
+window.title("Miles to Km Converter")
+window.minsize(width=300, height=200)
+window.config(padx=20, pady=20)
 
-button = tkinter.Button(text="Click me", command=button_clicked)
-button.pack()
+# ENTRY (0,1) # input miles to convert
+miles_input = Entry(width=7)
+miles_input.grid(row=0, column=1)
 
+# LABEL (0,2) # "Miles"
+label02 = Label(text="Miles")
+label02.grid(row=0, column=2)
 
-###ENTRY
-input = tkinter.Entry(width=10)
-input.pack()
-# print(input.get())
+# LABEL (1, 0) # "is equal to"
+label10 = Label(text="is equal to ")
+label10.grid(row=1, column=0)
+
+# LABEL (1, 1) # calculate and show the converted km
+label11 = Label(text="")
+label11.grid(row=1, column=1)
+
+# LABEL (1, 2) # "Km"
+label12 = Label(text="Km")
+label12.grid(row=1, column=2)
+
+# BUTTON (2,1) # action=convert
+button = Button(text="Calculate", command=convert)
+button.grid(row=2, column=1)
+
+##
+#Checkbutton
+checked_state = IntVar()
+checkbutton = Checkbutton(text="Round the result?", variable=checked_state, command=convert)
+checked_state.get()
+checkbutton.grid(row=2, column=2)
 
 window.mainloop()
