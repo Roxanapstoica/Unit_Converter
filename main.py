@@ -2,12 +2,20 @@ from tkinter import *
 
 
 def convert():
-    input_val = float(miles_input.get())
-    if checked_state.get() == 0:
-        val = input_val * 1.609344
-    else:
-        val = round(input_val * 1.609344)
-    label11.config(text=val)
+    input_val = miles_input.get()
+    if input_val != "":
+        input_val = float(miles_input.get())
+        if input_val >= 0:
+            if checked_state.get() == 0:
+                val = input_val * 1.609344
+            else:
+                val = round(input_val * 1.609344)
+            label11.config(text=val)
+            label_error = Label(text="                                            ")
+            label_error.grid(row=4, column=0)
+    elif input_val == "":
+        label_error = Label(text="Nu ati introdus o valoare.", fg="red")
+        label_error.grid(row=4, column=0)
 
 window = Tk()
 window.title("Miles to Km Converter")
